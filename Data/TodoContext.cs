@@ -7,5 +7,9 @@ namespace TodoApi.Data
         public TodoContext(DbContextOptions<TodoContext> options) : base(options) { }
 
         public DbSet<TodoItem> TodoItems { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TodoItem>().Property(t => t.Id).ValueGeneratedOnAdd();
+        }
     }
 }
