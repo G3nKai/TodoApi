@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TodoApi.Data;
 using TodoApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -14,15 +15,22 @@ public class TodoItemsController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<List<TodoItem>> GetAll() => _context.TodoItems.ToList();
-
-    [HttpPost]
-    public IActionResult Create(List<PostTodoItem> postItem)
+    public async Task<ActionResult<IEnumerable<TodoItem>>> Get()
     {
+        return await _context.TodoItems.ToListAsync();
+    }
+    [HttpPost]
+    public async Task<ActionResult<IEnumerable<TodoItem>>> Post(List<PostTodoItem> postItem)
+    {
+        if (postItem == null)
+        {
+            return BadRequest();
+        }
+
         List<TodoItem> items = new List<TodoItem>();
 
         foreach (PostTodoItem it in postItem)
-        {  
+        {
             var newItem = new TodoItem
             {
                 Id = 0,
@@ -31,42 +39,70 @@ public class TodoItemsController : ControllerBase
             };
             items.Add(newItem);
         }
+
         _context.TodoItems.AddRange(items);
-        _context.SaveChanges();
-        return CreatedAtAction(nameof(Create), items);
+        await _context.SaveChangesAsync();
+        return Ok(postItem);
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
-    {
-        var item = _context.TodoItems.Find(id);
-        if (item == null) return NotFound();
 
-        _context.TodoItems.Remove(item);
-        _context.SaveChanges();
-        return NoContent();
+    public async Task<ActionResult<TodoItem>> Delete(int id)
+    {
+        if (id <= 0)
+        {
+            return BadRequest();
+        }
+        TodoItem? user = _context.TodoItems.FirstOrDefault(x => x.Id == id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+        _context.TodoItems.Remove(user);
+        await _context.SaveChangesAsync();
+        return Ok(user);
     }
-
-    [HttpPut("{id}")]
-    public IActionResult Update(int id, TodoItem updatedItem)
+    [HttpPatch("{id}")]
+    public async Task<ActionResult<TodoItem>> Patch(int id, PutTodoItem item)
     {
-        var item = _context.TodoItems.Find(id);
-        if (item == null) return NotFound();
+        if (id <= 0 || item == null)
+        {
+            return BadRequest();
+        }
 
-        item.Duty = updatedItem.Duty;
-        item.IsCompleted = updatedItem.IsCompleted;
-        _context.SaveChanges();
-        return NoContent();
+        TodoItem? foundItem = await _context.TodoItems.FindAsync(id);
+
+        if (foundItem == null)
+        {
+            return NotFound();
+        }
+
+        foundItem.Duty = item.Duty;
+
+        _context.Update(foundItem);
+        await _context.SaveChangesAsync();
+        return Ok(foundItem);
     }
 
     [HttpPatch("{id}/complete")]
-    public IActionResult Complete(int id)
+    public async Task<ActionResult<TodoItem>> Patch(int id)
     {
-        var item = _context.TodoItems.Find(id);
-        if (item == null) return NotFound();
+        if (id <= 0)
+        {
+            return BadRequest();
+        }
 
-        item.IsCompleted = !item.IsCompleted;
-        _context.SaveChanges();
-        return NoContent();
+        TodoItem? foundItem = await _context.TodoItems.FindAsync(id);
+
+        if (foundItem == null)
+        {
+            return NotFound();
+        }
+
+        foundItem.IsCompleted = !foundItem.IsCompleted;
+
+        _context.Update(foundItem);
+        await _context.SaveChangesAsync();
+        return Ok(foundItem);
     }
 }
