@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using TodoApi.Data;
 using TodoApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
