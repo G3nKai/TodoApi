@@ -53,14 +53,14 @@ public class TodoItemsController : ControllerBase
         {
             return BadRequest();
         }
-        TodoItem? user = _context.TodoItems.FirstOrDefault(x => x.Id == id);
-        if (user == null)
+        TodoItem? item = _context.TodoItems.FirstOrDefault(x => x.Id == id);
+        if (item == null)
         {
             return NotFound();
         }
-        _context.TodoItems.Remove(user);
+        _context.TodoItems.Remove(item);
         await _context.SaveChangesAsync();
-        return Ok(user);
+        return Ok(item);
     }
     [HttpPatch("{id}")]
     public async Task<ActionResult<TodoItem>> Patch(int id, PutTodoItem item)
