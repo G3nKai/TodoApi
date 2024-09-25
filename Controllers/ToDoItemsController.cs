@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using TodoApi.Data;
 using TodoApi.Models;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -45,8 +46,43 @@ public class TodoItemsController : ControllerBase
         return Ok(postItem);
     }
 
-    [HttpDelete("{id}")]
+    [HttpPost("upload-json")]
+    public async Task<ActionResult<TodoItem>> UploadJsonFile(IFormFile file)
+    {
+        if (file == null || file.Length == 0)
+        {
+            return BadRequest();
+        }
 
+        using (StreamReader jsonReader = new StreamReader(file.OpenReadStream()))
+        {
+            var jsonString = await jsonReader.ReadToEndAsync();
+
+            List<TodoItem>? items;
+            try
+            {
+                items = JsonConvert.DeserializeObject<List<TodoItem>>(jsonString);
+            }
+            catch (JsonException)
+            {
+                return BadRequest();
+            }
+
+            if (items == null || items.Count == 0)
+            {
+                return BadRequest();
+            }
+
+            _context.TodoItems.RemoveRange(_context.TodoItems);
+            _context.TodoItems.AddRange(items);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(items);
+        }
+    }
+
+    [HttpDelete("{id}")]
     public async Task<ActionResult<TodoItem>> Delete(int id)
     {
         if (id <= 0)
