@@ -1,2 +1,3 @@
 https://metanit.com/sharp/aspnet5/23.2.php
 https://dev.to/_patrickgod/object-relational-mapping-code-first-migration-with-entity-framework-core-nno
+https://metanit.com/sharp/aspnet6/12.1.php

@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TodoApi.Models;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 
 [Route("api/[controller]")]
 [ApiController]
