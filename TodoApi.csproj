@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\204-2049954_banner-download-edit-draw-svg-png-icon-free.png" />
+    <None Include="wwwroot\index.css" />
+    <None Include="wwwroot\index.html" />
+    <None Include="wwwroot\index.js" />
+    <None Include="wwwroot\note-task-comment-message-edit-write_108613.png" />
+    <None Include="wwwroot\OOjs_UI_icon_close-ltr-progressive.svg.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

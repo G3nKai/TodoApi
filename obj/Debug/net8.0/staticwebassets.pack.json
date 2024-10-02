@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Shaphran\\Desktop\\project development\\TodoApi\\wwwroot\\204-2049954_banner-download-edit-draw-svg-png-icon-free.png",
+      "PackagePath": "staticwebassets\\204-2049954_banner-download-edit-draw-svg-png-icon-free.png"
+    },
+    {
+      "Id": "C:\\Users\\Shaphran\\Desktop\\project development\\TodoApi\\wwwroot\\OOjs_UI_icon_close-ltr-progressive.svg.png",
+      "PackagePath": "staticwebassets\\OOjs_UI_icon_close-ltr-progressive.svg.png"
+    },
+    {
+      "Id": "C:\\Users\\Shaphran\\Desktop\\project development\\TodoApi\\wwwroot\\index.css",
+      "PackagePath": "staticwebassets\\index.css"
+    },
+    {
+      "Id": "C:\\Users\\Shaphran\\Desktop\\project development\\TodoApi\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\Shaphran\\Desktop\\project development\\TodoApi\\wwwroot\\index.js",
+      "PackagePath": "staticwebassets\\index.js"
+    },
+    {
+      "Id": "C:\\Users\\Shaphran\\Desktop\\project development\\TodoApi\\wwwroot\\note-task-comment-message-edit-write_108613.png",
+      "PackagePath": "staticwebassets\\note-task-comment-message-edit-write_108613.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.TodoApi.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.TodoApi.props",
+      "PackagePath": "build\\TodoApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.TodoApi.props",
+      "PackagePath": "buildMultiTargeting\\TodoApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.TodoApi.props",
+      "PackagePath": "buildTransitive\\TodoApi.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
